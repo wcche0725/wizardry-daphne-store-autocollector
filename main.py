@@ -1,5 +1,6 @@
 import time
 import os
+import sys
 from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -22,7 +23,7 @@ def main():
     login_button = driver.find_element(By.XPATH, "(//button[@data-testid='fast-login-button-authorization-user-id'])")
 
     actions.move_to_element(login_button).perform()
-    user_id_field.send_keys(os.getenv("USER_ID"))
+    user_id_field.send_keys(sys.argv[1] if len(sys.argv) > 1 else os.getenv("USER_ID"))
     login_button.click()
 
     #give the system time to log in

@@ -17,4 +17,4 @@ USER_ID="your_Wizardry_ID"
 
 Then execute `python main.py` on the command line.
 
-This file should work across environments, locales, and operating systems; it just requires the Chrome webdriver. Should also be compatible with `cron` (which is what I plan to do).
+This file should work across environments, locales, and operating systems; it just requires the Chrome webdriver. Should also be compatible with `cron` (see the GitHub Actions workflow for an example).
