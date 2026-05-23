@@ -13,4 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: pagopa/dx/.github/actions/keep-alive@main
+      - uses: pagopa/dx/actions/keep-alive@main
+        with:
+          bot_token: ${{ secrets.GITHUB_TOKEN }}
