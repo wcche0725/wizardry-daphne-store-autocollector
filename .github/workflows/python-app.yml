@@ -7,6 +7,11 @@ on:
   schedule:
     - cron: "0 11 * * 1"
   workflow_dispatch:
+    inputs:
+      user_id:
+        description: "Wizardry user ID (overrides WIZARDRY_USER_ID secret for this run)"
+        required: false
+        type: string
 
 permissions:
   contents: read
@@ -23,6 +28,12 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: pip install -r requirements.txt
-    - name: Run #test account
+    - name: Run autocollector
+      env:
+        WIZARDRY_USER_ID: ${{ inputs.user_id || secrets.WIZARDRY_USER_ID }}
       run: |
-        python main.py 5623889749 
+        if [ -z "$WIZARDRY_USER_ID" ]; then
+          echo "::error::WIZARDRY_USER_ID is empty. Set the repository secret WIZARDRY_USER_ID or pass user_id when dispatching."
+          exit 1
+        fi
+        python main.py "$WIZARDRY_USER_ID"
